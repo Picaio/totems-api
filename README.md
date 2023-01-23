@@ -15,7 +15,7 @@ Esta simple API permite administrar recursos tales como: usuarios, tareas y nota
 ![alt text](https://i.ibb.co/KwZtpCt/REST-API-SLIM-PHP.png "Example of RESTful API with Slim PHP micro framework")
 
 
-También puedes leerlo en inglés [README IN ENGLISH](README.md).
+También puedes leerlo en inglés [README IN ENGLISH](README_ENG.md).
 
 Principales tecnologías utilizadas: `PHP 8, Slim 3, MySQL, Redis, dotenv, PHPUnit and JSON Web Tokens.`
 
