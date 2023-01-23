@@ -16,6 +16,8 @@ final class Totem
 
     private int $userId;
 
+    private int $endDate;
+
     public function toJson(): object
     {
         return json_decode((string) json_encode(get_object_vars($this)), false);
@@ -70,6 +72,18 @@ final class Totem
     public function updateUserId(?int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getEndDate(): int
+    {
+        return $this->endDate;
+    }
+
+    public function updateEndDate(?int $endDate): self
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }
