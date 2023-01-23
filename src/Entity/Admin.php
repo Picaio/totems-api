@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-final class User
+final class Admin extends User
 {
     private int $id;
 

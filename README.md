@@ -1,8 +1,8 @@
-# REST API IN SLIM PHP
+# API REST EN SLIM PHP
 
-Example of RESTful API with [Slim PHP micro framework](https://www.slimframework.com).
+Ejemplo de API RESTful con micro framework [Slim PHP](https://www.slimframework.com).
 
-This simple API allows you to manage resources such as: users, tasks and notes.
+Esta simple API permite administrar recursos tales como: usuarios, tareas y notas.
 
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status](https://travis-ci.org/maurobonfietti/rest-api-slim-php.svg?branch=master)](https://travis-ci.org/maurobonfietti/rest-api-slim-php)
@@ -15,32 +15,32 @@ This simple API allows you to manage resources such as: users, tasks and notes.
 ![alt text](https://i.ibb.co/KwZtpCt/REST-API-SLIM-PHP.png "Example of RESTful API with Slim PHP micro framework")
 
 
-You can also read this [README IN SPANISH](README_SPANISH.md).
+También puedes leerlo en inglés [README IN ENGLISH](README.md).
 
-Main technologies used: `PHP 8, Slim 3, MySQL, Redis, dotenv, PHPUnit and JSON Web Tokens.`
+Principales tecnologías utilizadas: `PHP 8, Slim 3, MySQL, Redis, dotenv, PHPUnit and JSON Web Tokens.`
 
-Also, I use other aditional tools like: `Docker & Docker Compose, Travis CI, Swagger, Code Climate, Scrutinizer, Sonar Cloud, PHPStan, PHP Insights, Heroku and CORS.`
+Además, utilizo otras herramientas adicionales como: `Docker & Docker Compose, Travis CI, Swagger, Code Climate, Scrutinizer, Sonar Cloud, PHPStan, PHP Insights, Heroku and CORS.`
 
-More info about this project in my post: [How to create a REST API using Slim PHP](https://maurobonfietti.github.io/2019-06-03-rest-api-slim-php/).
+Más información sobre este proyecto en mi publicación: [Cómo crear una API REST con Slim PHP](https://maurobonfietti.github.io/2019-06-03-rest-api-slim-php/).
 
-I implemented this API in [this project](https://github.com/maurobonfietti/rest-api-slim-php-web-app). It's a todo list web app developed in Angular.
+Implementé esta API en [este proyecto](https://github.com/maurobonfietti/rest-api-slim-php-web-app). Es una aplicación web tipo lista de tareas, desarrollada en Angular.
 
 
-## :gear: QUICK INSTALL:
+## :gear: INSTALACIÓN RÁPIDA:
 
-### Requirements:
+### Requerimientos:
 
 - Git.
 - Composer.
 - PHP >= 8.0
 - MySQL/MariaDB.
-- Redis (Optional).
-- or Docker.
+- Redis (Opcional).
+- O simplemente Docker.
 
 
-### With Composer:
+### Usando Composer:
 
-You can create a new project running the following commands:
+Puede crear un nuevo proyecto ejecutando los siguientes comandos:
 
 ```bash
 $ composer create-project maurobonfietti/rest-api-slim-php [my-api-name]
@@ -53,9 +53,9 @@ $ composer start
 [![How to install](https://cdn.loom.com/sessions/thumbnails/0ca3648baa674de2ba2f4180e781eb21-with-play.gif)](https://youtu.be/Zp_vod5wWWk)
 
 
-### With Git:
+### Usando Git:
 
-In your terminal execute this commands:
+En su terminal favorita ejecute estos comandos:
 
 ```bash
 $ git clone https://github.com/maurobonfietti/rest-api-slim-php.git && cd rest-api-slim-php
@@ -67,18 +67,18 @@ $ composer start
 ```
 
 
-### With Docker:
+### Usando Docker:
 
-You can use this project using **docker** and **docker-compose**.
+Puedes probar este proyecto usando **docker** y **docker-compose**.
 
 
-**Minimal Docker Version:**
+**Version Requerida Docker:**
 
 * Engine: 18.03+
 * Compose: 1.21+
 
 
-**Commands:**
+**Comandos:**
 
 ```bash
 # Start the API (this is my alias for: docker-compose up -d --build).
@@ -95,56 +95,56 @@ $ make down
 ```
 
 
-## :wrench: TROUBLESHOOTING:
+## :wrench: INSTALACIÓN PASO A PASO:
 
-If you get stuck, you can try [this guide step by step](TROUBLESHOOTING.md).
+Si tuviste alguna duda o problema, puedes consultar [esta guía paso a paso](TROUBLESHOOTING.md).
 
 
 ## :cinema: TUTORIALS:
 
-Mini-series of videos about Slim PHP (Spanish Audio :sound: :es: :argentina:).
+Mini serie de videos acerca de Slim PHP.
 
 ### :video_camera: VIDEO #1
 
-[How to install and configure this API.](https://youtu.be/Zp_vod5wWWk)
+[Cómo instalar y configurar esta API.](https://youtu.be/Zp_vod5wWWk)
 
 ### :movie_camera: VIDEO #2
 
-[How to use JWT for Authentication.](https://youtu.be/TPnoPLBgZTg)
+[Ejemplo de cómo utilizar esta API con JWT para autenticación.](https://youtu.be/TPnoPLBgZTg)
 
 ### :video_camera: VIDEO #3
 
-[Using Redis Cache.](https://youtu.be/qX_TVjxEZSc)
+[Cómo usar Redis en esta API con Slim PHP.](https://youtu.be/qX_TVjxEZSc)
 
 ### :movie_camera: VIDEO #4
 
-[Deploy Slim PHP on Heroku.](https://youtu.be/-F09LCgNuGg)
+[Cómo hacer el despliegue de una API con Slim PHP usando Heroku.](https://youtu.be/-F09LCgNuGg)
 
 
-## :package: DEPENDENCIES:
+## :package: DEPENDENCIAS:
 
-### LIST OF REQUIRE DEPENDENCIES:
+### LISTA DE DEPENDENCIAS REQUERIDAS:
 
-- [slim/slim](https://github.com/slimphp/Slim): Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
-- [respect/validation](https://github.com/Respect/Validation): The most awesome validation engine ever created for PHP.
-- [palanik/corsslim](https://github.com/palanik/CorsSlim): Cross-origin resource sharing (CORS) middleware for PHP Slim.
-- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv): Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
-- [predis/predis](https://github.com/nrk/predis/): Flexible and feature-complete Redis client for PHP and HHVM.
-- [firebase/php-jwt](https://github.com/firebase/php-jwt): A simple library to encode and decode JSON Web Tokens (JWT) in PHP.
+- [slim/slim](https://github.com/slimphp/Slim): Micro framework PHP que ayuda a escribir rápidamente aplicaciones y APIs simples pero potentes.
+- [respect/validation](https://github.com/Respect/Validation): El motor de validación más impresionante jamás creado para PHP.
+- [palanik/corsslim](https://github.com/palanik/CorsSlim): Middleware de intercambio de recursos de origen cruzado (CORS) para PHP Slim.
+- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv): Carga las variables de entorno de `.env` a `getenv()`, `$_ENV` y `$_SERVER` automágicamente.
+- [predis/predis](https://github.com/nrk/predis/): Cliente Redis flexible y con funciones completas para PHP y HHVM.
+- [firebase/php-jwt](https://github.com/firebase/php-jwt): Una biblioteca simple para codificar y decodificar JSON Web Tokens (JWT) en PHP.
 
-### LIST OF DEVELOPMENT DEPENDENCIES:
+### LISTA DE DEPENDENCIAS PARA DESARROLLO:
 
-- [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit): The PHP Unit Testing framework.
-- [phpstan/phpstan](https://github.com/phpstan/phpstan): PHPStan - PHP Static Analysis Tool.
-- [pestphp/pest](https://github.com/pestphp/pest): Pest is an elegant PHP Testing Framework with a focus on simplicity.
-- [nunomaduro/phpinsights](https://github.com/nunomaduro/phpinsights): Instant PHP quality checks from your console.
-- [vimeo/psalm](https://github.com/vimeo/psalm): A static analysis tool for finding errors in PHP applications.
-- [rector/rector](https://github.com/rectorphp/rector): Instant Upgrades and Instant Refactoring of any PHP 5.3+ code.
+- [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit): Framework para hacer Unit Testing en PHP.
+- [phpstan/phpstan](https://github.com/phpstan/phpstan): PHPStan, herramienta de análisis estático para PHP.
+- [pestphp/pest](https://github.com/pestphp/pest): Pest es un elegante PHP Testing Framework con un enfoque en la simplicidad.
+- [nunomaduro/phpinsights](https://github.com/nunomaduro/phpinsights): Comprobaciones instantáneas de calidad PHP desde su consola.
+- [vimeo/psalm](https://github.com/vimeo/psalm): Una herramienta de análisis estático para encontrar errores en aplicaciones PHP.
+- [rector/rector](https://github.com/rectorphp/rector): Actualizaciones y refactorización instantánea de cualquier código PHP 5.3+.
 
 
 ## :traffic_light: TESTING:
 
-Run all PHPUnit tests with `composer test`.
+Ejecutar los tests PHPUnit con `composer test`.
 
 ```bash
 $ composer test
@@ -159,7 +159,7 @@ OK (56 tests, 343 assertions)
 ```
 
 
-## SCREENSHOOTS:
+## CAPTURA DE PANTALLA:
 
 <img width="493" alt="Screen Shot API using Browser" src="https://user-images.githubusercontent.com/24535949/121755366-58c07580-caed-11eb-9688-28183f80ab2a.png">
 
@@ -170,7 +170,7 @@ OK (56 tests, 343 assertions)
 ----
 
 
-## :books: DOCUMENTATION:
+## :books: DOCUMENTACIÓN:
 
 ### ENDPOINTS:
 
@@ -217,45 +217,45 @@ OK (56 tests, 343 assertions)
 
 - Delete Note: `DELETE /api/v1/notes/{id}`
 
-Also, you can see the API documentation with the [full list of endpoints](extras/docs/endpoints.md).
+Ver documentación de la API con la [lista completa de endpoints](extras/docs/endpoints.md).
 
 
-### HELP AND DOCS:
+### AYUDA Y MANUAL DE USO:
 
-For more information on how to use the REST API, see the following documentation available on [Postman Documenter](https://documenter.getpostman.com/view/1915278/RztfwByr).
+Para más información sobre el modo de uso de la API REST, ver la siguiente documentación disponible en [Postman Documenter](https://documenter.getpostman.com/view/1915278/RztfwByr).
 
 
-### IMPORT WITH POSTMAN:
+### IMPORTAR EN POSTMAN:
 
-All the information of the API, prepared to download and use as postman collection: [Import Collection](https://www.getpostman.com/collections/b8493a923ab81ef53ebb).
+Toda la información de la API, preparada para descargar y utilizar como colección de postman: [Importar Colección](https://www.getpostman.com/collections/b8493a923ab81ef53ebb).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b8493a923ab81ef53ebb)
 
 
-### OPEN API SPEC:
+### OPEN API:
 
-Also, you can view the OpenAPI Specification, using [Swagger UI](https://rest-api-slim-php.herokuapp.com/docs/index.html).
+Además se puede ver la especificación OpenAPI, utilizando [Swagger UI](https://rest-api-slim-php.herokuapp.com/docs/index.html).
 
 
-## :rocket: DEPLOY:
+## :rocket: DESPIEGLE:
 
-You can deploy this API with Heroku Free.
+Puedes hacer deploy de esta API usando Heroku Free.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
-## :heart: DO YOU LIKE THE PROJECT?
+## :heart: ¿TE GUSTA EL PROYECTO?
 
-You can support this project inviting me a coffee :coffee: :yum: or giving a **star** to this repo :star: :sunglasses:.
+Puedes apoyar este proyecto invitándome un café :coffee: :yum: o dando una estrella a este repo :star: :sunglasses:.
 
 <a href='https://ko-fi.com/maurobonfietti' target='_blank'>
   <img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 </a>
 
 
-## :page_facing_up: LICENSE
+## :page_facing_up: LICENCIA
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Licencia MIT. Consultar [Archivo de licencia](LICENSE.md) para obtener más información.
 
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat

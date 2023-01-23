@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-final class User
+final class Totem
 {
     private int $id;
 
     private string $name;
-    
-    private string $role;
 
-    private string $email;
+    private ?string $description;
 
-    private string $password;
+    private int $status;
+
+    private int $userId;
 
     public function toJson(): object
     {
@@ -38,38 +38,38 @@ final class User
         return $this;
     }
 
-    public function getRole(): string
+    public function getDescription(): ?string
     {
-        return $this->role;
+        return $this->description;
     }
 
-    public function updateRole(string $role): self
+    public function updateDescription(?string $description): self
     {
-        $this->role = $role;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getEmail(): string
+    public function getStatus(): int
     {
-        return $this->email;
+        return $this->status;
     }
 
-    public function updateEmail(string $email): self
+    public function updateStatus(int $status): self
     {
-        $this->email = $email;
+        $this->status = $status;
 
         return $this;
     }
 
-    public function getPassword(): string
+    public function getUserId(): int
     {
-        return $this->password;
+        return $this->userId;
     }
 
-    public function updatePassword(string $password): self
+    public function updateUserId(?int $userId): self
     {
-        $this->password = $password;
+        $this->userId = $userId;
 
         return $this;
     }
