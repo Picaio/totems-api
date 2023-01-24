@@ -4,41 +4,41 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Note;
+use App\Entity\Totem;
 
-final class NoteRepository extends BaseRepository
+final class TotemRepository extends BaseRepository
 {
-    public function checkAndGetNote(int $noteId): Note
+    public function checkAndGetTotem(int $totemId): Totem
     {
-        $query = 'SELECT * FROM `notes` WHERE `id` = :id';
+        $query = 'SELECT * FROM `totems` WHERE `id` = :id';
         $statement = $this->database->prepare($query);
-        $statement->bindParam(':id', $noteId);
+        $statement->bindParam(':id', $totemId);
         $statement->execute();
-        $note = $statement->fetchObject(Note::class);
-        if (! $note) {
-            throw new \App\Exception\Note('Note not found.', 404);
+        $totem = $statement->fetchObject(Totem::class);
+        if (! $totem) {
+            throw new \App\Exception\Totem('Totem not found.', 404);
         }
 
-        return $note;
+        return $totem;
     }
 
     /**
      * @return array<string>
      */
-    public function getNotes(): array
+    public function getTotems(): array
     {
-        $query = 'SELECT * FROM `notes` ORDER BY `id`';
+        $query = 'SELECT * FROM `totems` ORDER BY `id`';
         $statement = $this->database->prepare($query);
         $statement->execute();
 
         return (array) $statement->fetchAll();
     }
 
-    public function getQueryNotesByPage(): string
+    public function getQueryTotemsByPage(): string
     {
         return "
             SELECT *
-            FROM `notes`
+            FROM `totems`
             WHERE `name` LIKE CONCAT('%', :name, '%')
             AND `description` LIKE CONCAT('%', :description, '%')
             ORDER BY `id`
@@ -48,7 +48,7 @@ final class NoteRepository extends BaseRepository
     /**
      * @return array<string>
      */
-    public function getNotesByPage(
+    public function getTotemsByPage(
         int $page,
         int $perPage,
         ?string $name,
@@ -58,7 +58,7 @@ final class NoteRepository extends BaseRepository
             'name' => is_null($name) ? '' : $name,
             'description' => is_null($description) ? '' : $description,
         ];
-        $query = $this->getQueryNotesByPage();
+        $query = $this->getQueryTotemsByPage();
         $statement = $this->database->prepare($query);
         $statement->bindParam('name', $params['name']);
         $statement->bindParam('description', $params['description']);
@@ -74,48 +74,48 @@ final class NoteRepository extends BaseRepository
         );
     }
 
-    public function createNote(Note $note): Note
+    public function createTotem(Totem $totem): Totem
     {
         $query = '
-            INSERT INTO `notes`
+            INSERT INTO `totems`
                 (`name`, `description`)
             VALUES
                 (:name, :description)
         ';
         $statement = $this->database->prepare($query);
-        $name = $note->getName();
-        $desc = $note->getDescription();
+        $name = $totem->getName();
+        $desc = $totem->getDescription();
         $statement->bindParam(':name', $name);
         $statement->bindParam(':description', $desc);
         $statement->execute();
 
-        return $this->checkAndGetNote((int) $this->database->lastInsertId());
+        return $this->checkAndGetTotem((int) $this->database->lastInsertId());
     }
 
-    public function updateNote(Note $note): Note
+    public function updateTotem(Totem $totem): Totem
     {
         $query = '
-            UPDATE `notes`
+            UPDATE `totems`
             SET `name` = :name, `description` = :description
             WHERE `id` = :id
         ';
         $statement = $this->database->prepare($query);
-        $id = $note->getId();
-        $name = $note->getName();
-        $desc = $note->getDescription();
+        $id = $totem->getId();
+        $name = $totem->getName();
+        $desc = $totem->getDescription();
         $statement->bindParam(':id', $id);
         $statement->bindParam(':name', $name);
         $statement->bindParam(':description', $desc);
         $statement->execute();
 
-        return $this->checkAndGetNote((int) $id);
+        return $this->checkAndGetTotem((int) $id);
     }
 
-    public function deleteNote(int $noteId): void
+    public function deleteTotem(int $totemId): void
     {
-        $query = 'DELETE FROM `notes` WHERE `id` = :id';
+        $query = 'DELETE FROM `totems` WHERE `id` = :id';
         $statement = $this->database->prepare($query);
-        $statement->bindParam(':id', $noteId);
+        $statement->bindParam(':id', $totemId);
         $statement->execute();
     }
 }

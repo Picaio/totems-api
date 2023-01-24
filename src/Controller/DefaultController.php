@@ -9,15 +9,17 @@ use Slim\Http\Response;
 
 final class DefaultController extends BaseController
 {
-    private const API_VERSION = '2.17.0';
+    private const API_VERSION = '1.0';
 
     public function getHelp(Request $request, Response $response): Response
     {
+        date_default_timezone_set("America/New_York");
         $url = $this->container->get('settings')['app']['domain'];
         $endpoints = [
+            'login' => $url . '/login',
             'tasks' => $url . '/api/v1/tasks',
             'users' => $url . '/api/v1/users',
-            'notes' => $url . '/api/v1/notes',
+            'totems' => $url . '/api/v1/totems',
             'docs' => $url . '/docs/index.html',
             'status' => $url . '/status',
             'this help' => $url . '',
@@ -51,12 +53,12 @@ final class DefaultController extends BaseController
     {
         $taskService = $this->container->get('task_service');
         $userService = $this->container->get('find_user_service');
-        $noteService = $this->container->get('find_note_service');
+        $totemService = $this->container->get('find_totem_service');
 
         return [
             'tasks' => count($taskService->getAllTasks()),
             'users' => count($userService->getAll()),
-            'notes' => count($noteService->getAll()),
+            'totems' => count($totemService->getAll()),
         ];
     }
 

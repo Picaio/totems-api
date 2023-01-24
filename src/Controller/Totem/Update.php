@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Note;
+namespace App\Controller\Totem;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -19,8 +19,8 @@ final class Update extends Base
     ): Response {
         $input = (array) $request->getParsedBody();
         $id = (int) $args['id'];
-        $note = $this->getServiceUpdateNote()->update($input, $id);
+        $totem = $this->getServiceUpdateTotem()->update($input, $id);
 
-        return $this->jsonResponse($response, 'success', $note, 200);
+        return $this->jsonResponse($response, 'success', $totem, 200);
     }
 }

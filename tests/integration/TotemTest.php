@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\integration;
 
-class NoteTest extends BaseTestCase
+class TotemTest extends BaseTestCase
 {
     private static int $id;
 
     /**
-     * Test Get All Notes.
+     * Test Get All Totems.
      */
-    public function testGetNotes(): void
+    public function testGetTotems(): void
     {
-        $response = $this->runApp('GET', '/api/v1/notes');
+        $response = $this->runApp('GET', '/api/v1/totems');
 
         $result = (string) $response->getBody();
         $value = json_encode(json_decode($result));
@@ -30,11 +30,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Get Notes By Page.
+     * Test Get Totems By Page.
      */
-    public function testGetNotesByPage(): void
+    public function testGetTotemsByPage(): void
     {
-        $response = $this->runApp('GET', '/api/v1/notes?page=1&perPage=3');
+        $response = $this->runApp('GET', '/api/v1/totems?page=1&perPage=3');
 
         $result = (string) $response->getBody();
         $value = (string) json_encode(json_decode($result));
@@ -52,11 +52,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Get One Note.
+     * Test Get One Totem.
      */
-    public function testGetNote(): void
+    public function testGetTotem(): void
     {
-        $response = $this->runApp('GET', '/api/v1/notes/1');
+        $response = $this->runApp('GET', '/api/v1/totems/1');
 
         $result = (string) $response->getBody();
 
@@ -70,11 +70,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Get Note Not Found.
+     * Test Get Totem Not Found.
      */
-    public function testGetNoteNotFound(): void
+    public function testGetTotemNotFound(): void
     {
-        $response = $this->runApp('GET', '/api/v1/notes/123456789');
+        $response = $this->runApp('GET', '/api/v1/totems/123456789');
 
         $result = (string) $response->getBody();
 
@@ -87,14 +87,14 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Create Note.
+     * Test Create Totem.
      */
-    public function testCreateNote(): void
+    public function testCreateTotem(): void
     {
         $response = $this->runApp(
             'POST',
-            '/api/v1/notes',
-            ['name' => 'My Test Note', 'description' => 'New Note...']
+            '/api/v1/totems',
+            ['name' => 'My Test Totem', 'description' => 'New Totem...']
         );
 
         $result = (string) $response->getBody();
@@ -111,11 +111,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Get Note Created.
+     * Test Get Totem Created.
      */
-    public function testGetNoteCreated(): void
+    public function testGetTotemCreated(): void
     {
-        $response = $this->runApp('GET', '/api/v1/notes/' . self::$id);
+        $response = $this->runApp('GET', '/api/v1/totems/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -129,11 +129,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Create Note Without Name.
+     * Test Create Totem Without Name.
      */
-    public function testCreateNoteWithoutName(): void
+    public function testCreateTotemWithoutName(): void
     {
-        $response = $this->runApp('POST', '/api/v1/notes');
+        $response = $this->runApp('POST', '/api/v1/totems');
 
         $result = (string) $response->getBody();
 
@@ -145,13 +145,13 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Create Note With Invalid Name.
+     * Test Create Totem With Invalid Name.
      */
-    public function testCreateNoteWithInvalidName(): void
+    public function testCreateTotemWithInvalidName(): void
     {
         $response = $this->runApp(
             'POST',
-            '/api/v1/notes',
+            '/api/v1/totems',
             ['name' => '']
         );
 
@@ -165,14 +165,14 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Update Note.
+     * Test Update Totem.
      */
-    public function testUpdateNote(): void
+    public function testUpdateTotem(): void
     {
         $response = $this->runApp(
             'PUT',
-            '/api/v1/notes/' . self::$id,
-            ['name' => 'Victor Notes', 'description' => 'Pep.']
+            '/api/v1/totems/' . self::$id,
+            ['name' => 'Victor Totems', 'description' => 'Pep.']
         );
 
         $result = (string) $response->getBody();
@@ -187,11 +187,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Update Note Without Send Data.
+     * Test Update Totem Without Send Data.
      */
-    public function testUpdateNoteWithOutSendData(): void
+    public function testUpdateTotemWithOutSendData(): void
     {
-        $response = $this->runApp('PUT', '/api/v1/notes/' . self::$id);
+        $response = $this->runApp('PUT', '/api/v1/totems/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -205,14 +205,14 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Update Note Not Found.
+     * Test Update Totem Not Found.
      */
-    public function testUpdateNoteNotFound(): void
+    public function testUpdateTotemNotFound(): void
     {
         $response = $this->runApp(
             'PUT',
-            '/api/v1/notes/123456789',
-            ['name' => 'Note']
+            '/api/v1/totems/123456789',
+            ['name' => 'Totem']
         );
 
         $result = (string) $response->getBody();
@@ -227,11 +227,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Delete Note.
+     * Test Delete Totem.
      */
-    public function testDeleteNote(): void
+    public function testDeleteTotem(): void
     {
-        $response = $this->runApp('DELETE', '/api/v1/notes/' . self::$id);
+        $response = $this->runApp('DELETE', '/api/v1/totems/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -242,11 +242,11 @@ class NoteTest extends BaseTestCase
     }
 
     /**
-     * Test Delete Note Not Found.
+     * Test Delete Totem Not Found.
      */
-    public function testDeleteNoteNotFound(): void
+    public function testDeleteTotemNotFound(): void
     {
-        $response = $this->runApp('DELETE', '/api/v1/notes/123456789');
+        $response = $this->runApp('DELETE', '/api/v1/totems/123456789');
 
         $result = (string) $response->getBody();
 

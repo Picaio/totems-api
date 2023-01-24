@@ -14,10 +14,11 @@ final class GetAll extends Base
         $page = $request->getQueryParam('page', null);
         $perPage = $request->getQueryParam('perPage', null);
         $name = $request->getQueryParam('name', null);
+        $role = $request->getQueryParam('role', null);
         $email = $request->getQueryParam('email', null);
 
         $users = $this->getFindUserService()
-            ->getUsersByPage((int) $page, (int) $perPage, $name, $email);
+            ->getUsersByPage((int) $page, (int) $perPage, $name, $role, $email);
 
         return $this->jsonResponse($response, 'success', $users, 200);
     }

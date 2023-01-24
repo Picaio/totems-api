@@ -32,6 +32,9 @@ final class Create extends Base
         if (! isset($user->name)) {
             throw new \App\Exception\User('The field "name" is required.', 400);
         }
+        if (! isset($user->role)) {
+            throw new \App\Exception\User('The field "role" is required.', 400);
+        }
         if (! isset($user->email)) {
             throw new \App\Exception\User('The field "email" is required.', 400);
         }
@@ -40,6 +43,7 @@ final class Create extends Base
         }
         $myuser = new User();
         $myuser->updateName(self::validateUserName($user->name));
+        $myuser->updateRole(self::validateUserRole($user->role));
         $myuser->updateEmail(self::validateEmail($user->email));
         $hash = password_hash($user->password, PASSWORD_BCRYPT);
         $myuser->updatePassword($hash);

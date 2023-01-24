@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Note;
+namespace App\Service\Totem;
 
 final class Find extends Base
 {
@@ -11,13 +11,13 @@ final class Find extends Base
      */
     public function getAll(): array
     {
-        return $this->noteRepository->getNotes();
+        return $this->totemRepository->getTotems();
     }
 
     /**
      * @return array<string>
      */
-    public function getNotesByPage(
+    public function getTotemsByPage(
         int $page,
         int $perPage,
         ?string $name,
@@ -30,7 +30,7 @@ final class Find extends Base
             $perPage = self::DEFAULT_PER_PAGE_PAGINATION;
         }
 
-        return $this->noteRepository->getNotesByPage(
+        return $this->totemRepository->getTotemsByPage(
             $page,
             $perPage,
             $name,
@@ -38,14 +38,14 @@ final class Find extends Base
         );
     }
 
-    public function getOne(int $noteId): object
+    public function getOne(int $totemId): object
     {
         if (self::isRedisEnabled() === true) {
-            $note = $this->getOneFromCache($noteId);
+            $totem = $this->getOneFromCache($totemId);
         } else {
-            $note = $this->getOneFromDb($noteId)->toJson();
+            $totem = $this->getOneFromDb($totemId)->toJson();
         }
 
-        return $note;
+        return $totem;
     }
 }

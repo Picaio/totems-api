@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-final class Note
+final class Totem
 {
     private int $id;
 

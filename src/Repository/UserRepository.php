@@ -41,15 +41,18 @@ final class UserRepository extends BaseRepository
         int $page,
         int $perPage,
         ?string $name,
+        ?string $role,
         ?string $email
     ): array {
         $params = [
             'name' => is_null($name) ? '' : $name,
+            'role' => is_null($role) ? '' : $role,
             'email' => is_null($email) ? '' : $email,
         ];
         $query = $this->getQueryUsersByPage();
         $statement = $this->database->prepare($query);
         $statement->bindParam('name', $params['name']);
+        $statement->bindParam('role', $params['role']);
         $statement->bindParam('email', $params['email']);
         $statement->execute();
         $total = $statement->rowCount();
@@ -66,9 +69,10 @@ final class UserRepository extends BaseRepository
     public function getQueryUsersByPage(): string
     {
         return "
-            SELECT `id`, `name`, `email`
+            SELECT `id`, `name`, `role`, `email`
             FROM `users`
             WHERE `name` LIKE CONCAT('%', :name, '%')
+            AND `role` LIKE CONCAT('%', :role, '%')
             AND `email` LIKE CONCAT('%', :email, '%')
             ORDER BY `id`
         ";
@@ -79,7 +83,7 @@ final class UserRepository extends BaseRepository
      */
     public function getAll(): array
     {
-        $query = 'SELECT `id`, `name`, `email` FROM `users` ORDER BY `id`';
+        $query = 'SELECT `id`, `name`, `role`, `email` FROM `users` ORDER BY `id`';
         $statement = $this->database->prepare($query);
         $statement->execute();
 
@@ -112,15 +116,17 @@ final class UserRepository extends BaseRepository
     {
         $query = '
             INSERT INTO `users`
-                (`name`, `email`, `password`)
+                (`name`, `role`, `email`, `password`)
             VALUES
-                (:name, :email, :password)
+                (:name, :role, :email, :password)
         ';
         $statement = $this->database->prepare($query);
         $name = $user->getName();
+        $role = $user->getRole();
         $email = $user->getEmail();
         $password = $user->getPassword();
         $statement->bindParam('name', $name);
+        $statement->bindParam('role', $role);
         $statement->bindParam('email', $email);
         $statement->bindParam('password', $password);
         $statement->execute();
@@ -131,14 +137,16 @@ final class UserRepository extends BaseRepository
     public function update(User $user): User
     {
         $query = '
-            UPDATE `users` SET `name` = :name, `email` = :email WHERE `id` = :id
+            UPDATE `users` SET `name` = :name, `role` = :role, `email` = :email WHERE `id` = :id
         ';
         $statement = $this->database->prepare($query);
         $id = $user->getId();
         $name = $user->getName();
+        $role = $user->getRole();
         $email = $user->getEmail();
         $statement->bindParam('id', $id);
         $statement->bindParam('name', $name);
+        $statement->bindParam('role', $role);
         $statement->bindParam('email', $email);
         $statement->execute();
 

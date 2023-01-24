@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Note;
+namespace App\Controller\Totem;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -18,9 +18,9 @@ final class GetAll extends Base
         $name = $request->getQueryParam('name', null);
         $description = $request->getQueryParam('description', null);
 
-        $notes = $this->getServiceFindNote()
-            ->getNotesByPage((int) $page, (int) $perPage, $name, $description);
+        $totems = $this->getServiceFindTotem()
+            ->getTotemsByPage((int) $page, (int) $perPage, $name, $description);
 
-        return $this->jsonResponse($response, 'success', $notes, 200);
+        return $this->jsonResponse($response, 'success', $totems, 200);
     }
 }
