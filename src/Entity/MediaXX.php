@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-final class Task
+final class Media
 {
     private int $id;
 

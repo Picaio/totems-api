@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Task;
+namespace App\Controller\Media;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-final class Delete extends Base
+final class GetOne extends Base
 {
     /**
      * @param array<string> $args
@@ -18,10 +18,10 @@ final class Delete extends Base
         array $args
     ): Response {
         $input = (array) $request->getParsedBody();
-        $taskId = (int) $args['id'];
+        $mediaId = (int) $args['id'];
         $userId = $this->getAndValidateUserId($input);
-        $this->getTaskService()->delete($taskId, $userId);
+        $media = $this->getMediaService()->getOne($mediaId, $userId);
 
-        return $this->jsonResponse($response, 'success', null, 204);
+        return $this->jsonResponse($response, 'success', $media, 200);
     }
 }

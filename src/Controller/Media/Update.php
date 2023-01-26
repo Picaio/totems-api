@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Task;
+namespace App\Controller\Media;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -18,8 +18,8 @@ final class Update extends Base
         array $args
     ): Response {
         $input = (array) $request->getParsedBody();
-        $task = $this->getTaskService()->update($input, (int) $args['id']);
+        $media = $this->getMediaService()->update($input, (int) $args['id']);
 
-        return $this->jsonResponse($response, 'success', $task, 200);
+        return $this->jsonResponse($response, 'success', $media, 200);
     }
 }

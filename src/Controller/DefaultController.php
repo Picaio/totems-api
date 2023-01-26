@@ -17,7 +17,7 @@ final class DefaultController extends BaseController
         $url = $this->container->get('settings')['app']['domain'];
         $endpoints = [
             'login' => $url . '/login',
-            'tasks' => $url . '/api/v1/tasks',
+            'medias' => $url . '/api/v1/media',
             'users' => $url . '/api/v1/users',
             'totems' => $url . '/api/v1/totems',
             'docs' => $url . '/docs/index.html',
@@ -51,12 +51,12 @@ final class DefaultController extends BaseController
      */
     private function getDbStats(): array
     {
-        $taskService = $this->container->get('task_service');
+        $mediaService = $this->container->get('media_service');
         $userService = $this->container->get('find_user_service');
         $totemService = $this->container->get('find_totem_service');
 
         return [
-            'tasks' => count($taskService->getAllTasks()),
+            'medias' => count($mediaService->getAllMedias()),
             'users' => count($userService->getAll()),
             'totems' => count($totemService->getAll()),
         ];

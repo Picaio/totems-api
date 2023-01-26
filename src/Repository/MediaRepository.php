@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Task;
+use App\Entity\Media;
 
-final class TaskRepository extends BaseRepository
+final class MediaRepository extends BaseRepository
 {
-    public function getQueryTasksByPage(): string
+    public function getQueryMediasByPage(): string
     {
         return "
             SELECT *
-            FROM `tasks`
+            FROM `media`
             WHERE `userId` = :userId
             AND `name` LIKE CONCAT('%', :name, '%')
             AND `description` LIKE CONCAT('%', :description, '%')
@@ -24,7 +24,7 @@ final class TaskRepository extends BaseRepository
     /**
      * @return array<string>
      */
-    public function getTasksByPage(
+    public function getMediasByPage(
         int $userId,
         int $page,
         int $perPage,
@@ -38,7 +38,7 @@ final class TaskRepository extends BaseRepository
             'description' => is_null($description) ? '' : $description,
             'status' => is_null($status) ? '' : $status,
         ];
-        $query = $this->getQueryTasksByPage();
+        $query = $this->getQueryMediasByPage();
         $statement = $this->database->prepare($query);
         $statement->bindParam('userId', $params['userId']);
         $statement->bindParam('name', $params['name']);
@@ -56,72 +56,72 @@ final class TaskRepository extends BaseRepository
         );
     }
 
-    public function checkAndGetTask(int $taskId, int $userId): Task
+    public function checkAndGetMedia(int $mediaId, int $userId): Media
     {
         $query = '
-            SELECT * FROM `tasks` WHERE `id` = :id AND `userId` = :userId
+            SELECT * FROM `media` WHERE `id` = :id AND `userId` = :userId
         ';
         $statement = $this->getDb()->prepare($query);
-        $statement->bindParam('id', $taskId);
+        $statement->bindParam('id', $mediaId);
         $statement->bindParam('userId', $userId);
         $statement->execute();
-        $task = $statement->fetchObject(Task::class);
-        if (! $task) {
-            throw new \App\Exception\Task('Task not found.', 404);
+        $media = $statement->fetchObject(Media::class);
+        if (! $media) {
+            throw new \App\Exception\Media('Media not found.', 404);
         }
 
-        return $task;
+        return $media;
     }
 
     /**
      * @return array<string>
      */
-    public function getAllTasks(): array
+    public function getAllMedias(): array
     {
-        $query = 'SELECT * FROM `tasks` ORDER BY `id`';
+        $query = 'SELECT * FROM `media` ORDER BY `id`';
         $statement = $this->getDb()->prepare($query);
         $statement->execute();
 
         return (array) $statement->fetchAll();
     }
 
-    public function create(Task $task): Task
+    public function create(Media $media): Media
     {
         $query = '
-            INSERT INTO `tasks`
+            INSERT INTO `media`
                 (`name`, `description`, `status`, `userId`)
             VALUES
                 (:name, :description, :status, :userId)
         ';
         $statement = $this->getDb()->prepare($query);
-        $name = $task->getName();
-        $desc = $task->getDescription();
-        $status = $task->getStatus();
-        $userId = $task->getUserId();
+        $name = $media->getName();
+        $desc = $media->getDescription();
+        $status = $media->getStatus();
+        $userId = $media->getUserId();
         $statement->bindParam('name', $name);
         $statement->bindParam('description', $desc);
         $statement->bindParam('status', $status);
         $statement->bindParam('userId', $userId);
         $statement->execute();
 
-        $taskId = (int) $this->database->lastInsertId();
+        $mediaId = (int) $this->database->lastInsertId();
 
-        return $this->checkAndGetTask($taskId, (int) $userId);
+        return $this->checkAndGetMedia($mediaId, (int) $userId);
     }
 
-    public function update(Task $task): Task
+    public function update(Media $media): Media
     {
         $query = '
-            UPDATE `tasks`
+            UPDATE `media`
             SET `name` = :name, `description` = :description, `status` = :status
             WHERE `id` = :id AND `userId` = :userId
         ';
         $statement = $this->getDb()->prepare($query);
-        $id = $task->getId();
-        $name = $task->getName();
-        $desc = $task->getDescription();
-        $status = $task->getStatus();
-        $userId = $task->getUserId();
+        $id = $media->getId();
+        $name = $media->getName();
+        $desc = $media->getDescription();
+        $status = $media->getStatus();
+        $userId = $media->getUserId();
         $statement->bindParam('id', $id);
         $statement->bindParam('name', $name);
         $statement->bindParam('description', $desc);
@@ -129,14 +129,14 @@ final class TaskRepository extends BaseRepository
         $statement->bindParam('userId', $userId);
         $statement->execute();
 
-        return $this->checkAndGetTask((int) $id, (int) $userId);
+        return $this->checkAndGetMedia((int) $id, (int) $userId);
     }
 
-    public function delete(int $taskId, int $userId): void
+    public function delete(int $mediaId, int $userId): void
     {
-        $query = 'DELETE FROM `tasks` WHERE `id` = :id AND `userId` = :userId';
+        $query = 'DELETE FROM `media` WHERE `id` = :id AND `userId` = :userId';
         $statement = $this->getDb()->prepare($query);
-        $statement->bindParam('id', $taskId);
+        $statement->bindParam('id', $mediaId);
         $statement->bindParam('userId', $userId);
         $statement->execute();
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Task;
+namespace App\Controller\Media;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -19,7 +19,7 @@ final class GetAll extends Base
         $description = $request->getQueryParam('description', null);
         $status = $request->getQueryParam('status', null);
 
-        $tasks = $this->getTaskService()->getTasksByPage(
+        $medias = $this->getMediaService()->getMediasByPage(
             $userId,
             (int) $page,
             (int) $perPage,
@@ -28,6 +28,6 @@ final class GetAll extends Base
             $status
         );
 
-        return $this->jsonResponse($response, 'success', $tasks, 200);
+        return $this->jsonResponse($response, 'success', $medias, 200);
     }
 }

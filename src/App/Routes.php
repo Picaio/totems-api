@@ -13,7 +13,7 @@ return function ($app) {
     $app->post('/login', \App\Controller\User\Login::class);
 
     $app->group('/api/v1', function () use ($app): void {
-        $app->group('/Media', function () use ($app): void {
+        $app->group('/media', function () use ($app): void {
             $app->get('', Media\GetAll::class);
             $app->post('', Media\Create::class);
             $app->get('/{id}', Media\GetOne::class);

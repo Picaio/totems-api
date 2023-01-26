@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\integration;
 
-class TaskTest extends BaseTestCase
+class MediaTest extends BaseTestCase
 {
     private static int $id;
 
     /**
-     * Test Get All Tasks.
+     * Test Get All Medias.
      */
-    public function testGetTasks(): void
+    public function testGetMedias(): void
     {
-        $response = $this->runApp('GET', '/api/v1/tasks');
+        $response = $this->runApp('GET', '/api/v1/medias');
 
         $result = (string) $response->getBody();
 
@@ -26,11 +26,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Get Tasks By Page.
+     * Test Get Medias By Page.
      */
-    public function testGetTasksByPage(): void
+    public function testGetMediasByPage(): void
     {
-        $response = $this->runApp('GET', '/api/v1/tasks?page=1&perPage=3');
+        $response = $this->runApp('GET', '/api/v1/medias?page=1&perPage=3');
 
         $result = (string) $response->getBody();
 
@@ -44,11 +44,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Get One Task.
+     * Test Get One Media.
      */
-    public function testGetTask(): void
+    public function testGetMedia(): void
     {
-        $response = $this->runApp('GET', '/api/v1/tasks/1');
+        $response = $this->runApp('GET', '/api/v1/medias/1');
 
         $result = (string) $response->getBody();
 
@@ -62,11 +62,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Get Task Not Found.
+     * Test Get Media Not Found.
      */
-    public function testGetTaskNotFound(): void
+    public function testGetMediaNotFound(): void
     {
-        $response = $this->runApp('GET', '/api/v1/tasks/123456789');
+        $response = $this->runApp('GET', '/api/v1/medias/123456789');
 
         $result = (string) $response->getBody();
 
@@ -78,14 +78,14 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task.
+     * Test Create Media.
      */
-    public function testCreateTask(): void
+    public function testCreateMedia(): void
     {
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
-            ['name' => 'New Task', 'description' => 'My Desc.']
+            '/api/v1/medias',
+            ['name' => 'New Media', 'description' => 'My Desc.']
         );
 
         $result = (string) $response->getBody();
@@ -102,11 +102,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Get Task Created.
+     * Test Get Media Created.
      */
-    public function testGetTaskCreated(): void
+    public function testGetMediaCreated(): void
     {
-        $response = $this->runApp('GET', '/api/v1/tasks/' . self::$id);
+        $response = $this->runApp('GET', '/api/v1/medias/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -120,11 +120,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task Without Name.
+     * Test Create Media Without Name.
      */
-    public function testCreateTaskWithOutTaskName(): void
+    public function testCreateMediaWithOutMediaName(): void
     {
-        $response = $this->runApp('POST', '/api/v1/tasks');
+        $response = $this->runApp('POST', '/api/v1/medias');
 
         $result = (string) $response->getBody();
 
@@ -136,13 +136,13 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task With Invalid TaskName.
+     * Test Create Media With Invalid MediaName.
      */
-    public function testCreateTaskWithInvalidTaskName(): void
+    public function testCreateMediaWithInvalidMediaName(): void
     {
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
+            '/api/v1/medias',
             ['name' => '', 'status' => 1]
         );
 
@@ -155,13 +155,13 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task With Invalid Status.
+     * Test Create Media With Invalid Status.
      */
-    public function testCreateTaskWithInvalidStatus(): void
+    public function testCreateMediaWithInvalidStatus(): void
     {
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
+            '/api/v1/medias',
             ['name' => 'ToDo', 'status' => 123]
         );
 
@@ -174,16 +174,16 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task Without Authorization Bearer JWT.
+     * Test Create Media Without Authorization Bearer JWT.
      */
-    public function testCreateTaskWithoutBearerJWT(): void
+    public function testCreateMediaWithoutBearerJWT(): void
     {
         $auth = self::$jwt;
         self::$jwt = '';
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
-            ['name' => 'my task', 'status' => 0]
+            '/api/v1/medias',
+            ['name' => 'my media', 'status' => 0]
         );
         self::$jwt = $auth;
 
@@ -196,16 +196,16 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task With Invalid JWT.
+     * Test Create Media With Invalid JWT.
      */
-    public function testCreateTaskWithInvalidJWT(): void
+    public function testCreateMediaWithInvalidJWT(): void
     {
         $auth = self::$jwt;
         self::$jwt = 'invalidToken';
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
-            ['name' => 'my task', 'status' => 0]
+            '/api/v1/medias',
+            ['name' => 'my media', 'status' => 0]
         );
         self::$jwt = $auth;
 
@@ -218,16 +218,16 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Create Task With Forbidden JWT.
+     * Test Create Media With Forbidden JWT.
      */
-    public function testCreateTaskWithForbiddenJWT(): void
+    public function testCreateMediaWithForbiddenJWT(): void
     {
         $auth = self::$jwt;
         self::$jwt = 'Bearer eyJ0eXAiOiJK1NiJ9.eyJzdWIiOiI4Ii';
         $response = $this->runApp(
             'POST',
-            '/api/v1/tasks',
-            ['name' => 'my task', 'status' => 0]
+            '/api/v1/medias',
+            ['name' => 'my media', 'status' => 0]
         );
         self::$jwt = $auth;
 
@@ -240,14 +240,14 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Update Task.
+     * Test Update Media.
      */
-    public function testUpdateTask(): void
+    public function testUpdateMedia(): void
     {
         $response = $this->runApp(
             'PUT',
-            '/api/v1/tasks/' . self::$id,
-            ['name' => 'Update Task', 'description' => 'Update Desc', 'status' => 1]
+            '/api/v1/medias/' . self::$id,
+            ['name' => 'Update Media', 'description' => 'Update Desc', 'status' => 1]
         );
 
         $result = (string) $response->getBody();
@@ -262,11 +262,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Update Task Without Send Data.
+     * Test Update Media Without Send Data.
      */
-    public function testUpdateTaskWithOutSendData(): void
+    public function testUpdateMediaWithOutSendData(): void
     {
-        $response = $this->runApp('PUT', '/api/v1/tasks/' . self::$id);
+        $response = $this->runApp('PUT', '/api/v1/medias/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -278,14 +278,14 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Update Task Not Found.
+     * Test Update Media Not Found.
      */
-    public function testUpdateTaskNotFound(): void
+    public function testUpdateMediaNotFound(): void
     {
         $response = $this->runApp(
             'PUT',
-            '/api/v1/tasks/123456789',
-            ['name' => 'Task']
+            '/api/v1/medias/123456789',
+            ['name' => 'Media']
         );
 
         $result = (string) $response->getBody();
@@ -298,14 +298,14 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Update Task of Another User.
+     * Test Update Media of Another User.
      */
-    public function testUpdateTaskOfAnotherUser(): void
+    public function testUpdateMediaOfAnotherUser(): void
     {
         $response = $this->runApp(
             'PUT',
-            '/api/v1/tasks/6',
-            ['name' => 'Task']
+            '/api/v1/medias/6',
+            ['name' => 'Media']
         );
 
         $result = (string) $response->getBody();
@@ -318,11 +318,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Delete Task.
+     * Test Delete Media.
      */
-    public function testDeleteTask(): void
+    public function testDeleteMedia(): void
     {
-        $response = $this->runApp('DELETE', '/api/v1/tasks/' . self::$id);
+        $response = $this->runApp('DELETE', '/api/v1/medias/' . self::$id);
 
         $result = (string) $response->getBody();
 
@@ -333,11 +333,11 @@ class TaskTest extends BaseTestCase
     }
 
     /**
-     * Test Delete Task Not Found.
+     * Test Delete Media Not Found.
      */
-    public function testDeleteTaskNotFound(): void
+    public function testDeleteMediaNotFound(): void
     {
-        $response = $this->runApp('DELETE', '/api/v1/tasks/123456789');
+        $response = $this->runApp('DELETE', '/api/v1/medias/123456789');
 
         $result = (string) $response->getBody();
 

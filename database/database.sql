@@ -1,28 +1,28 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for tasks
+-- Table structure for media
 -- ----------------------------
-DROP TABLE IF EXISTS `tasks`;
-CREATE TABLE IF NOT EXISTS `tasks` (
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE IF NOT EXISTS `media` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` text,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `tasks_users_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `media_users_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of tasks
+-- Records of media
 -- ----------------------------
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (1, 'Go to cinema', 1, 8);
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (2, 'Buy shoes', 0, 8);
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (3, 'Go to shopping', 0, 8);
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (4, 'Pay the credit card ;-)', 1, 8);
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (5, 'Do math homework...', 0, 8);
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`) VALUES (6, 'Just Testing...', 1, 1);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (1, 'Go to cinema', 1, 8);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (2, 'Buy shoes', 0, 8);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (3, 'Go to shopping', 0, 8);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (4, 'Pay the credit card ;-)', 1, 8);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (5, 'Do math homework...', 0, 8);
+INSERT INTO `media` (`id`, `name`, `status`, `userId`) VALUES (6, 'Just Testing...', 1, 1);
 
 
 -- ----------------------------

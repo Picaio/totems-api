@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Task;
+namespace App\Service\Media;
 
-use App\Entity\Task;
+use App\Entity\Media;
 
-final class TaskService extends Base
+final class MediaService extends Base
 {
     /**
      * @return array<string>
      */
-    public function getTasksByPage(
+    public function getMediasByPage(
         int $userId,
         int $page,
         int $perPage,
@@ -26,7 +26,7 @@ final class TaskService extends Base
             $perPage = self::DEFAULT_PER_PAGE_PAGINATION;
         }
 
-        return $this->getTaskRepository()->getTasksByPage(
+        return $this->getMediaRepository()->getMediasByPage(
             $userId,
             $page,
             $perPage,
@@ -39,17 +39,17 @@ final class TaskService extends Base
     /**
      * @return array<string>
      */
-    public function getAllTasks(): array
+    public function getAllMedias(): array
     {
-        return $this->getTaskRepository()->getAllTasks();
+        return $this->getMediaRepository()->getAllMedias();
     }
 
     public function getOne(int $taskId, int $userId): object
     {
         if (self::isRedisEnabled() === true) {
-            $task = $this->getTaskFromCache($taskId, $userId);
+            $task = $this->getMediaFromCache($taskId, $userId);
         } else {
-            $task = $this->getTaskFromDb($taskId, $userId)->toJson();
+            $task = $this->getMediaFromDb($taskId, $userId)->toJson();
         }
 
         return $task;
@@ -62,15 +62,15 @@ final class TaskService extends Base
     {
         $data = json_decode((string) json_encode($input), false);
         if (! isset($data->name)) {
-            throw new \App\Exception\Task('The field "name" is required.', 400);
+            throw new \App\Exception\Media('The field "name" is required.', 400);
         }
-        $mytask = new Task();
-        $mytask->updateName(self::validateTaskName($data->name));
+        $mytask = new Media();
+        $mytask->updateName(self::validateMediaName($data->name));
         $description = isset($data->description) ? $data->description : null;
         $mytask->updateDescription($description);
         $status = 0;
         if (isset($data->status)) {
-            $status = self::validateTaskStatus($data->status);
+            $status = self::validateMediaStatus($data->status);
         }
         $mytask->updateStatus($status);
         $userId = null;
@@ -78,8 +78,8 @@ final class TaskService extends Base
             $userId = (int) $data->decoded->sub;
         }
         $mytask->updateUserId($userId);
-        /** @var Task $task */
-        $task = $this->getTaskRepository()->create($mytask);
+        /** @var Media $task */
+        $task = $this->getMediaRepository()->create($mytask);
         if (self::isRedisEnabled() === true) {
             $this->saveInCache(
                 $task->getId(),
@@ -96,9 +96,9 @@ final class TaskService extends Base
      */
     public function update(array $input, int $taskId): object
     {
-        $data = $this->validateTask($input, $taskId);
-        /** @var Task $task */
-        $task = $this->getTaskRepository()->update($data);
+        $data = $this->validateMedia($input, $taskId);
+        /** @var Media $task */
+        $task = $this->getMediaRepository()->update($data);
         if (self::isRedisEnabled() === true) {
             $this->saveInCache(
                 $task->getId(),
@@ -112,28 +112,28 @@ final class TaskService extends Base
 
     public function delete(int $taskId, int $userId): void
     {
-        $this->getTaskFromDb($taskId, $userId);
-        $this->getTaskRepository()->delete($taskId, $userId);
+        $this->getMediaFromDb($taskId, $userId);
+        $this->getMediaRepository()->delete($taskId, $userId);
         if (self::isRedisEnabled() === true) {
             $this->deleteFromCache($taskId, $userId);
         }
     }
 
-    private function validateTask(array $input, int $taskId): Task
+    private function validateMedia(array $input, int $taskId): Media
     {
-        $task = $this->getTaskFromDb($taskId, (int) $input['decoded']->sub);
+        $task = $this->getMediaFromDb($taskId, (int) $input['decoded']->sub);
         $data = json_decode((string) json_encode($input), false);
         if (! isset($data->name) && ! isset($data->status)) {
-            throw new \App\Exception\Task('Enter the data to update the task.', 400);
+            throw new \App\Exception\Media('Enter the data to update the task.', 400);
         }
         if (isset($data->name)) {
-            $task->updateName(self::validateTaskName($data->name));
+            $task->updateName(self::validateMediaName($data->name));
         }
         if (isset($data->description)) {
             $task->updateDescription($data->description);
         }
         if (isset($data->status)) {
-            $task->updateStatus(self::validateTaskStatus($data->status));
+            $task->updateStatus(self::validateMediaStatus($data->status));
         }
         $userId = null;
         if (isset($data->decoded) && isset($data->decoded->sub)) {

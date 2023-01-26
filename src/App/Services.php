@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Service\Totem;
-use App\Service\Task\TaskService;
+use App\Service\Media\MediaService;
 use App\Service\User;
 use Psr\Container\ContainerInterface;
 
@@ -42,10 +42,10 @@ $container['login_user_service'] = static fn (
     $container->get('redis_service')
 );
 
-$container['task_service'] = static fn (
+$container['media_service'] = static fn (
     ContainerInterface $container
-): TaskService => new TaskService(
-    $container->get('task_repository'),
+): MediaService => new MediaService(
+    $container->get('media_repository'),
     $container->get('redis_service')
 );
 
