@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Service\Note;
-use App\Service\Task\TaskService;
+use App\Service\Totem;
+use App\Service\Media\MediaService;
 use App\Service\User;
 use Psr\Container\ContainerInterface;
 
@@ -42,37 +42,37 @@ $container['login_user_service'] = static fn (
     $container->get('redis_service')
 );
 
-$container['task_service'] = static fn (
+$container['media_service'] = static fn (
     ContainerInterface $container
-): TaskService => new TaskService(
-    $container->get('task_repository'),
+): MediaService => new MediaService(
+    $container->get('media_repository'),
     $container->get('redis_service')
 );
 
-$container['find_note_service'] = static fn (
+$container['find_totem_service'] = static fn (
     ContainerInterface $container
-): Note\Find => new Note\Find(
-    $container->get('note_repository'),
+): Totem\Find => new Totem\Find(
+    $container->get('totem_repository'),
     $container->get('redis_service')
 );
 
-$container['create_note_service'] = static fn (
+$container['create_totem_service'] = static fn (
     ContainerInterface $container
-): Note\Create => new Note\Create(
-    $container->get('note_repository'),
+): Totem\Create => new Totem\Create(
+    $container->get('totem_repository'),
     $container->get('redis_service')
 );
 
-$container['update_note_service'] = static fn (
+$container['update_totem_service'] = static fn (
     ContainerInterface $container
-): Note\Update => new Note\Update(
-    $container->get('note_repository'),
+): Totem\Update => new Totem\Update(
+    $container->get('totem_repository'),
     $container->get('redis_service')
 );
 
-$container['delete_note_service'] = static fn (
+$container['delete_totem_service'] = static fn (
     ContainerInterface $container
-): Note\Delete => new Note\Delete(
-    $container->get('note_repository'),
+): Totem\Delete => new Totem\Delete(
+    $container->get('totem_repository'),
     $container->get('redis_service')
 );

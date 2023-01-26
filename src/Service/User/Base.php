@@ -29,6 +29,15 @@ abstract class Base extends BaseService
         return $name;
     }
 
+    protected static function validateUserRole(string $role): string
+    {
+        if (! v::alnum('ÁÉÍÓÚÑáéíóúñ.')->length(1, 100)->validate($role)) {
+            throw new \App\Exception\User('Invalid role.', 400);
+        }
+
+        return $role;
+    }
+
     protected static function validateEmail(string $emailValue): string
     {
         $email = filter_var($emailValue, FILTER_SANITIZE_EMAIL);

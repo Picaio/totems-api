@@ -13,6 +13,7 @@ final class Find extends Base
         int $page,
         int $perPage,
         ?string $name,
+        ?string $role,
         ?string $email
     ): array {
         if ($page < 1) {
@@ -26,6 +27,7 @@ final class Find extends Base
             $page,
             $perPage,
             $name,
+            $role,
             $email
         );
     }
